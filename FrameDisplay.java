@@ -23,7 +23,7 @@ public class FrameDisplay extends JFrame
      */
     public FrameDisplay(GeometricObject[] g)
     {
-        setTitle("Interactive Map");
+        setTitle("Project 1");
         setSize(WIDTH, HEIGHT);
         setResizable(false);
 
