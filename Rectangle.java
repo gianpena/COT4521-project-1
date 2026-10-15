@@ -2,65 +2,122 @@
 import java.awt.Graphics;
 
 /**
- * This class represents a rectangle with sides parallel to the axis;
- * rectangle is given by two opposite corners.
+ * This class represents a rectangle given by its four corners.
+ * The corners are stored in order around the perimeter (either clockwise
+ * or counter-clockwise). Rectangles may be axis-aligned or rotated.
  */
 public class Rectangle extends GeometricObject implements RigidlyTransformable
 {
-    //begin and end are opposite corners; no guaranties which one
-    private Point begin;
-    private Point end;
+    // Four corners of the rectangle, in order around the perimeter.
+    private Point p1;
+    private Point p2;
+    private Point p3;
+    private Point p4;
 
+    /**
+     * Default constructor; creates a unit square with corners
+     * (0,0), (1,0), (1,1), (0,1).
+     */
     public Rectangle()
     {
-        begin = new Point(0, 0);  //begin-upper corner = (0,0)
-        end = new Point(1, 1);    //end-lower corner = (1,1)   
+        p1 = new Point(0, 0);
+        p2 = new Point(1, 0);
+        p3 = new Point(1, 1);
+        p4 = new Point(0, 1);
     }
 
+    /**
+     * Constructor from two opposite corners. The resulting rectangle is
+     * axis-aligned.
+     *
+     * @param b one corner
+     * @param e opposite corner
+     */
     public Rectangle(Point b, Point e)
     {
-        begin = new Point(b.getX(), b.getY());
-        end = new Point(e.getX(), e.getY());
+        double minX = Math.min(b.getX(), e.getX());
+        double minY = Math.min(b.getY(), e.getY());
+        double maxX = Math.max(b.getX(), e.getX());
+        double maxY = Math.max(b.getY(), e.getY());
+
+        p1 = new Point(minX, minY);
+        p2 = new Point(maxX, minY);
+        p3 = new Point(maxX, maxY);
+        p4 = new Point(minX, maxY);
+    }
+
+    /**
+     * Constructor from four corners. The points should be given in order
+     * around the perimeter of the rectangle.
+     *
+     * @param p1 first corner
+     * @param p2 second corner
+     * @param p3 third corner
+     * @param p4 fourth corner
+     */
+    public Rectangle(Point p1, Point p2, Point p3, Point p4)
+    {
+        this.p1 = new Point(p1.getX(), p1.getY());
+        this.p2 = new Point(p2.getX(), p2.getY());
+        this.p3 = new Point(p3.getX(), p3.getY());
+        this.p4 = new Point(p4.getX(), p4.getY());
     }
 
     /**
      * Draws this rectangle.
-     * 
-     * @param g graphics context 
+     *
+     * @param g graphics context
      */
     @Override
     public void draw(Graphics g)
     {
-        int x = (int)smallestX(); //left x
-        int y = (int)smallestY(); //top y
-        int w = (int)width();
-        int h = (int) height();
-        
+        int[] x = {(int)p1.getX(), (int)p2.getX(), (int)p3.getX(), (int)p4.getX()};
+        int[] y = {(int)p1.getY(), (int)p2.getY(), (int)p3.getY(), (int)p4.getY()};
+
         g.setColor(getInteriorColor());
-        g.fillRect(x, y, w, h);
-        
+        g.fillPolygon(x, y, 4);
+
         g.setColor(getBoundaryColor());
-        g.drawRect(x, y, w, h);
+        g.drawPolygon(x, y, 4);
     }
 
     /**
      * Returns the first point defining this rectangle.
-     * 
-     * @return a point (corner) defining this rectangle
+     *
+     * @return a corner of this rectangle
      */
     public Point getBegin()
     {
-        return new Point(begin.getX(), begin.getY());
+        return new Point(p1.getX(), p1.getY());
     }
 
     /**
      * Returns the second point defining this rectangle.
-     * 
-     * @return a point (corner) defining this rectangle
+     *
+     * @return the corner opposite the first point
      */
     public Point getEnd()
     {
-        return new Point(end.getX(), end.getY());
+        return new Point(p3.getX(), p3.getY());
+    }
+
+    /**
+     * Returns the i-th corner of this rectangle (1-based index).
+     *
+     * @param i corner index, must be 1, 2, 3, or 4
+     * @return the i-th corner
+     * @throws IllegalArgumentException if i is not in [1,4]
+     */
+    public Point getCorner(int i)
+    {
+        switch (i)
+        {
+            case 1: return new Point(p1.getX(), p1.getY());
+            case 2: return new Point(p2.getX(), p2.getY());
+            case 3: return new Point(p3.getX(), p3.getY());
+            case 4: return new Point(p4.getX(), p4.getY());
+            default: throw new IllegalArgumentException("Corner index must be 1-4");
+        }
     }
 
     /**
@@ -70,7 +127,7 @@ public class Rectangle extends GeometricObject implements RigidlyTransformable
      */
     public double greatestX()
     {
-        return begin.getX()>end.getX() ? begin.getX():end.getX();
+        return Math.max(Math.max(p1.getX(), p2.getX()), Math.max(p3.getX(), p4.getX()));
     }
 
     /**
@@ -80,59 +137,66 @@ public class Rectangle extends GeometricObject implements RigidlyTransformable
      */
     public double greatestY()
     {
-        return begin.getY()>end.getY() ? begin.getY():end.getY();
+        return Math.max(Math.max(p1.getY(), p2.getY()), Math.max(p3.getY(), p4.getY()));
     }
-    
+
     /**
-     * Calculates the height of this rectangle.
-     * 
+     * Calculates the height of this rectangle (length of the side between
+     * the second and third corners).
+     *
      * @return the height of this rectangle
      */
     public double height()
     {
-        return Math.abs(begin.getY() - end.getY());
+        return p2.distance(p3);
     }
 
     /**
      * Sets the the first point defining this rectangle.
-     * 
-     * @param p a point (corner) defining this rectangle
+     *
+     * @param p a corner of this rectangle
      */
     public void setBegin(Point p)
     {
-        begin = new Point(p.getX(), p.getY());
+        double dx = p.getX() - p1.getX();
+        double dy = p.getY() - p1.getY();
+        Vector v = new Vector(dx, dy);
+        translate(v);
     }
 
     /**
      * Sets the the second point defining this rectangle.
-     * 
-     * @param p a point (corner) defining this rectangle
+     *
+     * @param p the corner opposite the first point
      */
     public void setEnd(Point p)
     {
-        end = new Point(p.getX(), p.getY());
+        double dx = p.getX() - p3.getX();
+        double dy = p.getY() - p3.getY();
+        Vector v = new Vector(dx, dy);
+        translate(v);
     }
 
     /**
      * Determines the smallest x.
-     * 
+     *
      * @return the smallest x
      */
     public double smallestX()
     {
-        return begin.getX()<end.getX() ? begin.getX():end.getX();
+        return Math.min(Math.min(p1.getX(), p2.getX()), Math.min(p3.getX(), p4.getX()));
     }
 
     /**
      * Determines the smallest y.
-     * 
+     *
      * @return the smallest y
      */
     public double smallestY()
     {
-        return begin.getY()<end.getY() ? begin.getY():end.getY();
+        return Math.min(Math.min(p1.getY(), p2.getY()), Math.min(p3.getY(), p4.getY()));
     }
-    
+
     /**
      * Constructs a String description of this rectangle.
      *
@@ -142,11 +206,11 @@ public class Rectangle extends GeometricObject implements RigidlyTransformable
     public String toString()
     {
         String str = "RECTANGLE " + super.toString() + "\n";
-        str += begin + "\n" + end;
+        str += p1 + "\n" + p2 + "\n" + p3 + "\n" + p4;
 
         return str;
     }
-    
+
     /**
      * Translates this rectangle by given vector.
      *
@@ -155,24 +219,35 @@ public class Rectangle extends GeometricObject implements RigidlyTransformable
     @Override
     public void translate(Vector v)
     {
-        begin.translate(v);
-        end.translate(v);
+        p1.translate(v);
+        p2.translate(v);
+        p3.translate(v);
+        p4.translate(v);
     }
 
     @Override
     public void rotate(double theta) {
-        begin.rotate(theta);
-        end.rotate(theta);
+        p1.rotate(theta);
+        p2.rotate(theta);
+        p3.rotate(theta);
+        p4.rotate(theta);
     }
-    
+
+    @Override
+    public void setBearing(double theta) {
+        double current = Math.toDegrees(Math.atan2(p2.getY() - p1.getY(), p2.getX() - p1.getX()));
+        rotate(theta - current);
+    }
+
     /**
-     * Calculates the width of this rectangle.
-     * 
+     * Calculates the width of this rectangle (length of the side between
+     * the first and second corners).
+     *
      * @return the width of this rectangle
      */
     public double width()
     {
-        return Math.abs(begin.getX() - end.getX());
+        return p1.distance(p2);
     }
 
     /**
@@ -183,13 +258,38 @@ public class Rectangle extends GeometricObject implements RigidlyTransformable
      */
     boolean isPointInRectangle(Point p)
     {
-        double x = p.getX();
-        double y = p.getY();
-        if ( (smallestX() <= x && x <= greatestX()) &&
-                (smallestY() <= y && y <= greatestY()) )
-            return true;
-        else
-            return false;
+        Point[] corners = {p1, p2, p3, p4};
+        double[] crossProducts = new double[4];
+
+        for (int i = 0; i < 4; i++)
+        {
+            Point a = corners[i];
+            Point b = corners[(i + 1) % 4];
+
+            double ax = b.getX() - a.getX();
+            double ay = b.getY() - a.getY();
+            double bx = p.getX() - a.getX();
+            double by = p.getY() - a.getY();
+
+            crossProducts[i] = ax * by - ay * bx;
+        }
+
+        boolean allNonNegative = true;
+        boolean allNonPositive = true;
+
+        for (double cp : crossProducts)
+        {
+            if (cp < -1e-9)
+            {
+                allNonNegative = false;
+            }
+            if (cp > 1e-9)
+            {
+                allNonPositive = false;
+            }
+        }
+
+        return allNonNegative || allNonPositive;
     }
 
     public Rectangle boundingBox(Rectangle r) {
@@ -210,6 +310,6 @@ public class Rectangle extends GeometricObject implements RigidlyTransformable
         double greatesty_sum = greatestY() + r.greatestY();
 
         return new Rectangle(new Point(smallestx_sum, smallesty_sum), new Point(greatestx_sum, greatesty_sum));
-        
+
     }
 }

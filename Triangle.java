@@ -42,6 +42,16 @@ public class Triangle extends GeometricObject implements RigidlyTransformable {
         p3.rotate(theta);
     }
 
+    @Override
+    public void setBearing(double theta) {
+        // bearing is the direction of the altitude: from the midpoint of the
+        // base (p1, p3) through the apex p2
+        double midX = (p1.getX() + p3.getX()) / 2;
+        double midY = (p1.getY() + p3.getY()) / 2;
+        double current = Math.toDegrees(Math.atan2(p2.getY() - midY, p2.getX() - midX));
+        rotate(theta - current);
+    }
+
     public Point getP1() { return p1; }
     public Point getP2() { return p2; }
     public Point getP3() { return p3; }

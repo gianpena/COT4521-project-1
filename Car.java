@@ -52,7 +52,7 @@ public class Car extends GeometricObject {
         Vector v = center.to(Point.ORIGIN);
         for(RigidlyTransformable obj : new RigidlyTransformable[]{body, nose, frontLeftWheel, frontRightWheel, rearLeftWheel, rearRightWheel}) {
             obj.translate(v);
-            obj.rotate(heading);
+            obj.setBearing(heading);
             obj.translate(v.neg());
         }
 
