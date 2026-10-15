@@ -5,7 +5,7 @@ import java.awt.Graphics;
  * This class represents a rectangle with sides parallel to the axis;
  * rectangle is given by two opposite corners.
  */
-public class Rectangle extends GeometricObject implements Translatable
+public class Rectangle extends GeometricObject implements RigidlyTransformable
 {
     //begin and end are opposite corners; no guaranties which one
     private Point begin;
@@ -157,6 +157,12 @@ public class Rectangle extends GeometricObject implements Translatable
     {
         begin.translate(v);
         end.translate(v);
+    }
+
+    @Override
+    public void rotate(double theta) {
+        begin.rotate(theta);
+        end.rotate(theta);
     }
     
     /**

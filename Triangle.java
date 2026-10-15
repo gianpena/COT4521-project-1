@@ -1,6 +1,6 @@
 import java.awt.Graphics;
 
-public class Triangle extends GeometricObject implements Translatable {
+public class Triangle extends GeometricObject implements RigidlyTransformable {
     private Point p1;
     private Point p2;
     private Point p3;
@@ -33,6 +33,13 @@ public class Triangle extends GeometricObject implements Translatable {
         p1.translate(v);
         p2.translate(v);
         p3.translate(v);
+    }
+
+    @Override
+    public void rotate(double theta) {
+        p1.rotate(theta);
+        p2.rotate(theta);
+        p3.rotate(theta);
     }
 
     public Point getP1() { return p1; }

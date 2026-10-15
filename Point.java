@@ -4,7 +4,7 @@ import java.awt.*;
 /**
  * This class represents a point given by its x and y coordinates.
  */
-public class Point extends GeometricObject implements Translatable
+public class Point extends GeometricObject implements RigidlyTransformable
 {
     private double x;
     private double y;
@@ -110,6 +110,7 @@ public class Point extends GeometricObject implements Translatable
      * This is NOT to be confused with rotating the point by theta degrees. This method sets the angle of rotation to theta degrees.
      * @param theta given angle
      */
+    @Override
     public void rotate(double theta)
     {
         double angleRadians = Math.toRadians(theta);
