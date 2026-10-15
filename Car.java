@@ -48,15 +48,14 @@ public class Car extends GeometricObject {
         rearLeftWheel = new Rectangle(new Point(center.getX() + bodyLength/2 - wheelLength, center.getY() + bodyWidth/2),
                                       new Point(center.getX() + bodyLength/2, center.getY() + bodyWidth/2 + wheelWidth));
 
-        // change the bearing
-        for(Rectangle rect: new Rectangle[]{body, frontRightWheel, frontLeftWheel, rearRightWheel, rearLeftWheel}) {
-            rect.getBegin().rotate(heading);
-            rect.getEnd().rotate(heading);
+        // translate, rotate, translate back
+        Vector v = center.to(Point.ORIGIN);
+        for(RigidlyTransformable obj : new RigidlyTransformable[]{body, nose, frontLeftWheel, frontRightWheel, rearLeftWheel, rearRightWheel}) {
+            obj.translate(v);
+            obj.rotate(heading);
+            obj.translate(v.neg());
         }
 
-        nose.getP1().rotate(heading);
-        nose.getP2().rotate(heading);
-        nose.getP3().rotate(heading);
     }
 
     public Rectangle getBody() { return body; }

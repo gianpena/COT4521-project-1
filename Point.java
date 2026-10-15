@@ -169,4 +169,9 @@ public class Point extends GeometricObject implements RigidlyTransformable
 
         return closest;
     }
+
+    // creates a translation vector from current point to point P
+    public Vector to(Point p) {
+        return new Vector(p.getX() - getX(), p.getY() - getY());
+    }
 }
