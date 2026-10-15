@@ -12,3 +12,5 @@ The following Java classes were taken from the lecture materials:
 - `Line`
 - `LineSegment`
 - `Rectangle`
+
+We made minor modifications to some of these classes, and we made a total refactor of the `Rectangle` class.
