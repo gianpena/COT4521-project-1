@@ -72,7 +72,7 @@ public class Car extends GeometricObject {
         for(GeometricObject obj : new GeometricObject[]{nose, body, frontLeftWheel, frontRightWheel, rearLeftWheel, rearRightWheel}) {
             obj.setInteriorColor(getInteriorColor());
             obj.setBoundaryColor(getBoundaryColor());
-            obj.draw();
+            obj.draw(g);
         }
     }
 
