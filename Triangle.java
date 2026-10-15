@@ -32,4 +32,8 @@ public class Triangle extends GeometricObject {
         p2.translate(v);
         p3.translate(v);
     }
+
+    public Point getP1() { return p1; }
+    public Point getP2() { return p2; }
+    public Point getP3() { return p3; }
 }
