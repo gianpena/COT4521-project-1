@@ -20,13 +20,11 @@ public class Car extends GeometricObject {
 
     public Car(Point center) {
         this.center = new Point(center.getX(), center.getY());
-        update();
     }
 
     public Car(Point center, double heading) {
-        this.center = new Point(center.getX(), center.getY());
+        this(center);
         this.heading = heading;
-        update();
     }
 
     public void update() {
@@ -66,5 +64,13 @@ public class Car extends GeometricObject {
     public Rectangle getRearLeftWheel() { return rearLeftWheel; }
     public Rectangle getRearRightWheel() { return rearRightWheel; }
     public Triangle getNose() { return nose; }
+
+    @Override
+    public void draw(Graphics g) {
+        update()
+
+        for(GeometricObject obj : new GeometricObject[]{nose, body, frontLeftWheel, frontRightWheel, rearLeftWheel, rearRightWheel})
+            obj.draw();
+    }
 
 }
