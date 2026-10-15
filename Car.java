@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 
 public class Car extends GeometricObject {
 
