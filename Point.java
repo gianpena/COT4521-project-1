@@ -8,6 +8,7 @@ public class Point extends GeometricObject
 {
     private double x;
     private double y;
+    public static final Point ORIGIN = new Point(0, 0);
 
     /**
      * Instantiates a Point object with coordinates (0, 0) and parent's
@@ -104,22 +105,21 @@ public class Point extends GeometricObject
     }
 
     /**
-     * Rotates this point about the origin by the given angle.
-     *
-     * @param angle given angle
+     * Sets the angle of rotation of this point around the origin to the given angle.
+     * This is NOT to be confused with rotating the point by theta degrees. This method sets the angle of rotation to theta degrees.
+     * @param theta given angle
      */
-    public void rotate(double angle)
+    public void rotate(double theta)
     {
-        double angleRadians = Math.toRadians(angle);
+        double angleRadians = Math.toRadians(theta);
 
         double sine = Math.sin(angleRadians);
         double cosine = Math.cos(angleRadians);
 
-        double x1 = x*cosine - y*sine;
-        double y1 = x*sine + y*cosine;
+        double r = this.distance(Point.ORIGIN);
 
-        x = x1;
-        y = y1;
+        x = r * cosine;
+        y = r * sine;
     }
 
     /**
