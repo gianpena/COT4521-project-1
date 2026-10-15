@@ -4,7 +4,7 @@ import java.awt.*;
 /**
  * This class represents a point given by its x and y coordinates.
  */
-public class Point extends GeometricObject
+public class Point extends GeometricObject implements Translatable
 {
     private double x;
     private double y;
@@ -77,6 +77,7 @@ public class Point extends GeometricObject
      *
      * @param v translation vector
      */
+    @Override
     public void translate(Vector v)
     {
         x += v.getX();

@@ -5,7 +5,7 @@ import java.awt.Graphics;
  * This class represents a rectangle with sides parallel to the axis;
  * rectangle is given by two opposite corners.
  */
-public class Rectangle extends GeometricObject
+public class Rectangle extends GeometricObject implements Translatable
 {
     //begin and end are opposite corners; no guaranties which one
     private Point begin;
@@ -152,6 +152,7 @@ public class Rectangle extends GeometricObject
      *
      * @param v given vector
      */
+    @Override
     public void translate(Vector v)
     {
         begin.translate(v);

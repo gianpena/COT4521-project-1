@@ -1,5 +1,6 @@
+import java.awt.Graphics;
 
-public class Triangle extends GeometricObject {
+public class Triangle extends GeometricObject implements Translatable {
     private Point p1;
     private Point p2;
     private Point p3;
@@ -27,6 +28,7 @@ public class Triangle extends GeometricObject {
         g.drawPolygon(x, y, 3);
     }
 
+    @Override
     public void translate(Vector v) {
         p1.translate(v);
         p2.translate(v);
