@@ -67,7 +67,7 @@ public class Car extends GeometricObject {
 
     @Override
     public void draw(Graphics g) {
-        update()
+        update();
 
         for(GeometricObject obj : new GeometricObject[]{nose, body, frontLeftWheel, frontRightWheel, rearLeftWheel, rearRightWheel})
             obj.setInteriorColor(getInteriorColor());
