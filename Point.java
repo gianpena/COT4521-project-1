@@ -106,30 +106,31 @@ public class Point extends GeometricObject implements RigidlyTransformable
     }
 
     /**
-     * Rotates this point around the origin by the given angle.
+     * Rotates this point around the given point by the given angle.
      *
+     * @param p center of rotation
      * @param theta given angle in degrees
      */
     @Override
-    public void rotate(double theta)
+    public void rotate(Point p, double theta)
     {
         double angleRadians = Math.toRadians(theta);
 
         double sine = Math.sin(angleRadians);
         double cosine = Math.cos(angleRadians);
 
-        double newX = x * cosine - y * sine;
-        double newY = x * sine + y * cosine;
+        double dx = x - p.getX();
+        double dy = y - p.getY();
 
-        x = newX;
-        y = newY;
+        x = p.getX() + dx * cosine - dy * sine;
+        y = p.getY() + dx * sine + dy * cosine;
     }
 
     @Override
     public void setBearing(double theta)
     {
         double current = Math.toDegrees(Math.atan2(y, x));
-        rotate(theta - current);
+        rotate(ORIGIN, theta - current);
     }
 
     /**

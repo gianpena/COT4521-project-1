@@ -225,18 +225,24 @@ public class Rectangle extends GeometricObject implements RigidlyTransformable
         p4.translate(v);
     }
 
+    /**
+     * Rotates this rectangle around the given point by the given angle.
+     *
+     * @param p center of rotation
+     * @param angle given angle in degrees
+     */
     @Override
-    public void rotate(double theta) {
-        p1.rotate(theta);
-        p2.rotate(theta);
-        p3.rotate(theta);
-        p4.rotate(theta);
+    public void rotate(Point p, double angle) {
+        p1.rotate(p, angle);
+        p2.rotate(p, angle);
+        p3.rotate(p, angle);
+        p4.rotate(p, angle);
     }
 
     @Override
     public void setBearing(double theta) {
         double current = Math.toDegrees(Math.atan2(p2.getY() - p1.getY(), p2.getX() - p1.getX()));
-        rotate(theta - current);
+        rotate(Point.ORIGIN, theta - current);
     }
 
     /**

@@ -36,10 +36,10 @@ public class Triangle extends GeometricObject implements RigidlyTransformable {
     }
 
     @Override
-    public void rotate(double theta) {
-        p1.rotate(theta);
-        p2.rotate(theta);
-        p3.rotate(theta);
+    public void rotate(Point p, double angle) {
+        p1.rotate(p, angle);
+        p2.rotate(p, angle);
+        p3.rotate(p, angle);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Triangle extends GeometricObject implements RigidlyTransformable {
         double midX = (p1.getX() + p3.getX()) / 2;
         double midY = (p1.getY() + p3.getY()) / 2;
         double current = Math.toDegrees(Math.atan2(p2.getY() - midY, p2.getX() - midX));
-        rotate(theta - current);
+        rotate(Point.ORIGIN, theta - current);
     }
 
     public Point getP1() { return p1; }
