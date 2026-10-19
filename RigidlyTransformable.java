@@ -1,5 +1,5 @@
 public interface RigidlyTransformable {
     void translate(Vector v);
-    void rotate(double theta);
+    void rotate(Point p, double angle);
     void setBearing(double theta);
 }
