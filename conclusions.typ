@@ -29,3 +29,5 @@ The way we ended up choosing to implement this was by basing all polygons render
   caption: [ An image of the `Car` class's code, along with the application's GUI open with the car rendered. ],
   supplement: none
 )
+= What We Learned
+We learned that rotating a shape around an arbitrary point amounts to translating it to the origin, rotating it, and translating it back. Because screen _y-_values increase going down, positive angles turn clockwise on screen. We also learned how to compose a larger object, the `Car`, out of the geometric objects from class, and to move or turn it by applying the same transformation to every part. Finally, we learned to animate in Java with a Swing `Timer`, moving the car a small step and calling `repaint()` on every tick.

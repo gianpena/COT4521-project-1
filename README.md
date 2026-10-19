@@ -1,5 +1,6 @@
 # Project Members
 - Gian Peña PID 6396658
+- Henrique Pitta Laranjinha 6527270
 
 # Credit Attributions
 
