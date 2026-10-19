@@ -9,7 +9,7 @@ import java.awt.*;
  *
  * @author Antonio Hernandez
  * @author Gian Peña (PID 6396658)
- * @author Henrique Pitta Laranjinha (PID XXXXXXX)
+ * @author Henrique Pitta Laranjinha (PID 6527270)
  */
 abstract public class GeometricObject
 {

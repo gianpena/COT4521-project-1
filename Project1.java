@@ -14,7 +14,7 @@ import javax.swing.Timer;
  * user, then animates the robot.
  *
  * @author Gian Peña (PID 6396658)
- * @author Henrique Pitta Laranjinha (PID XXXXXXX)
+ * @author Henrique Pitta Laranjinha (PID 6527270)
  */
 public class Project1 {
 

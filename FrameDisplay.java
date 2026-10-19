@@ -6,7 +6,7 @@ import javax.swing.*;
  * Based on code from the COT4521 course materials.
  *
  * @author Gian Peña (PID 6396658)
- * @author Henrique Pitta Laranjinha (PID XXXXXXX)
+ * @author Henrique Pitta Laranjinha (PID 6527270)
  */
 public class FrameDisplay extends JFrame
 {   
