@@ -1,5 +1,10 @@
 /**
  * This class represents a position vector given by its x and y components.
+ *
+ * Based on code from the COT4521 course materials.
+ *
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
  */
 public class Vector
 {

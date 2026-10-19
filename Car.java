@@ -1,5 +1,12 @@
 import java.awt.Graphics;
 
+/**
+ * This class represents the robot: a rectangular body, a triangular
+ * bumper, and four rectangular wheels.
+ *
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
+ */
 public class Car extends GeometricObject {
 
     private Point center;

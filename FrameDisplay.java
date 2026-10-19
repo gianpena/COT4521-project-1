@@ -1,5 +1,13 @@
 import javax.swing.*;
 
+/**
+ * This class represents the window frame that holds the drawing panel.
+ *
+ * Based on code from the COT4521 course materials.
+ *
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
+ */
 public class FrameDisplay extends JFrame
 {   
     int WIDTH = 450;

@@ -9,6 +9,13 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
+/**
+ * Reads the robot's initial location and moves from a file chosen by the
+ * user, then animates the robot.
+ *
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
+ */
 public class Project1 {
 
     private static final int DELAY = 15; // ms between frames

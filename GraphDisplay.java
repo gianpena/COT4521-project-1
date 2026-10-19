@@ -2,6 +2,14 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class represents the panel where geometric objects are drawn.
+ *
+ * Based on code from the COT4521 course materials.
+ *
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
+ */
 public class GraphDisplay extends JPanel
 {
     GeometricObject[] gArray; //geometric objects

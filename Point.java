@@ -3,6 +3,11 @@ import java.awt.*;
 
 /**
  * This class represents a point given by its x and y coordinates.
+ *
+ * Based on code from the COT4521 course materials.
+ *
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
  */
 public class Point extends GeometricObject implements RigidlyTransformable
 {

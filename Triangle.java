@@ -1,5 +1,11 @@
 import java.awt.Graphics;
 
+/**
+ * This class represents a triangle given by its three vertices.
+ *
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
+ */
 public class Triangle extends GeometricObject implements RigidlyTransformable {
     private Point p1;
     private Point p2;

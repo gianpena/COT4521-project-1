@@ -4,8 +4,12 @@ import java.awt.*;
 /**
  * Abstract class representing a geometric object. It is the apex class in the
  * hierarchy of geometric objects.
- * 
+ *
+ * Based on code from the COT4521 course materials.
+ *
  * @author Antonio Hernandez
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
  */
 abstract public class GeometricObject
 {

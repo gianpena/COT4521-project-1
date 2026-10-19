@@ -5,6 +5,11 @@ import java.awt.Graphics;
  * This class represents a rectangle given by its four corners.
  * The corners are stored in order around the perimeter (either clockwise
  * or counter-clockwise). Rectangles may be axis-aligned or rotated.
+ *
+ * Based on code from the COT4521 course materials.
+ *
+ * @author Gian Peña (PID 6396658)
+ * @author Henrique Pitta Laranjinha (PID XXXXXXX)
  */
 public class Rectangle extends GeometricObject implements RigidlyTransformable
 {
